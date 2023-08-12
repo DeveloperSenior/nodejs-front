@@ -1,0 +1,18 @@
+extends layout
+
+block content
+ div(class="container p-2" style="width: 18rem;") 
+   h1 Login
+   div(class="card-body")
+        form(role='form', action='/login', method='post')
+           div(class="mb-3")
+            label(for='username' class="form-label") Usuario/Email
+            input.form-control(type='text', id='user', name='username', placeholder='Ingrese usuario')
+           div(class="mb-3")
+            label(for='password' class="form-label") Clave
+            input.form-control(type='password', id='password', name='password', placeholder='Ingrese clave')
+           button(class="btn btn-dark p-2" type='submit') Ingresar
+          if error 
+            div(class="alert alert-danger p-2" role="alert")
+              p.lead #{error}
+
