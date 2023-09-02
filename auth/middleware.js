@@ -18,7 +18,9 @@ const auth = ((req, res, next) => {
 });
 
 const logout = ((req, res) => {
-
+    //res.cookies('appTag', { expires: Date.now() });
+    console.log('res: ', res);
+    res.redirect('/home');
 });
 
 module.exports = { auth, logout };

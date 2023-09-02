@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router();
 const userService = require('../services/user.service');
 var jwt = require('jsonwebtoken');
-const { auth } = require('../auth/middleware');
+const { auth, logout } = require('../auth/middleware');
 
 const LOGIN_TITLE = 'Iniciar sesión';
 const USERS_TITLE = 'Usuarios!';
+const HOME_TITLE = 'Inicio!';
 
 /* GET home page. */
 
@@ -13,12 +14,16 @@ router.get('/login', function(req, res, next) {
     res.render('login', { title: LOGIN_TITLE });
 });
 
-router.get('/logout', function(req, res, next) {
+router.get('/', function(req, res, next) {
+    res.redirect('/home');
+});
 
+router.get('/logout', function(req, res, next) {
+    logout(req, res);
 });
 
 router.get('/home', auth, function(req, res, next) {
-    res.render('index', { title: LOGIN_TITLE });
+    res.render('index', { title: HOME_TITLE });
 });
 
 router.get('/users', auth, async(req, res, next) => {
